@@ -1,15 +1,21 @@
-import httpthread
 from twisted.internet import reactor
-from udplistener import UdpListener
 import web
+import sys
+import signal
 from httphandler import HttpHandler
+from udplistener import UdpListener
+import httpthread
 
+def ctrlchandler(signum,_):
+    reactor.stop()
 
 if __name__ == '__main__':
-	urls = ("/tasks", "HttpHandler")
-	app = web.application(urls,globals())
-	t1=httpthread.HTTPThread(app)
-	t1.start()
-	reactor.listenUDP(4200,UdpListener())
-	reactor.run()
-
+    signal.signal(signal.SIGTERM,ctrlchandler)
+    signal.signal(signal.SIGINT,ctrlchandler)
+    urls = ("/tasks", "HttpHandler")
+    app = web.application(urls,globals())
+    t1=httpthread.HTTPThread(app)
+    t1.setDaemon(True)
+    t1.start()
+    reactor.listenUDP(4200,UdpListener())
+    reactor.run()
