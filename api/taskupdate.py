@@ -1,3 +1,4 @@
+
 import socket
 import json
 import time
@@ -13,4 +14,7 @@ def updateTask(taskName,taskProgress,taskInfo,taskid,taskServer=('127.0.0.1',420
 def generateTaskID():
     return hex(int(time.time()))[2:]+hex(random.randint(0,0xffffff))[2:]
 
-	
+__taskID=generateTaskID()
+
+def getTaskID():
+    return __taskID
