@@ -8,9 +8,9 @@ import httpthread
 
 app=None
 
-def ctrlchandler(signum,_):
-    reactor.stop()
+def ctrlchandler(signum,frame):
     app.stop()
+    reactor.callFromThread(reactor.stop)
 
 if __name__ == '__main__':
     signal.signal(signal.SIGTERM,ctrlchandler)
@@ -18,7 +18,6 @@ if __name__ == '__main__':
     urls = ("/tasks", "HttpHandler")
     app = web.application(urls,globals())
     t1=httpthread.HTTPThread(app)
-    #t1.setDaemon(True)
     t1.start()
     reactor.listenUDP(4200,UdpListener())
-    reactor.run()
+    reactor.run(installSignalHandlers = 0)

@@ -1,5 +1,4 @@
 from twisted.internet.protocol import DatagramProtocol
-from twisted.internet import reactor
 from tasklist import tasks,refreshTaskList
 import json
 from time import time
