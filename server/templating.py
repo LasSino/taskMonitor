@@ -2,12 +2,11 @@
 #Author:LTW
 
 '''
-This is a simple templating engine.It is based on str.format and html.escape.
+This is a simple templating engine.It is based on str.format.
 
 This is rudimentary and is not suitable for too complex use.
-This templating system now supports html escape using html.escape.
+The HTML escape support is now removed because it's useless.
 '''
-import html
 class Templating:
     def __init__(self,filename):
         file=open(filename,'r',encoding="utf8")
@@ -15,7 +14,7 @@ class Templating:
         file.close()
 
     def render(self,argDict):
-        return html.escape(self.__template.format(**argDict))
+        return self.__template.format(**argDict)
     
     def renderList(self,dictList):
-        return html.escape("\n".join(map(lambda x:self.__template.format(**x),dictList)))
+        return "\n".join(map(lambda x:self.__template.format(**x),dictList))
