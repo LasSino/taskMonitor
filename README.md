@@ -10,7 +10,7 @@ Then the server provides a UI via HTTP and HTML.
 + This project is in a rudimentary stage. It can run well on most circumstances, but has **no guarantee** of performance, especially on **security** aspects.
 Therefore, it is recommended to be used inside a firewall and only monitor trusted programs.
 
-+ The templating system in the server is just a simple implementation using string format. It **does not** even support HTML escape letters.
++ The templating system in the server is just a simple implementation using string format. It is not suitable for too complex tasks.
 
 ***
 This project is part of [LTW](https://ltw-tech.top) infrastructure.
